@@ -69,6 +69,7 @@ void EventAction::BeginOfEventAction(const G4Event *anEvent) //const G4Event* an
 	superclustering_data.clear();
 	trajectories.clear();
 	graph_obj.clear();
+	graph_obj_high.clear();
 	true_jets_obj.clear();
 	pflow_jets_obj.clear();
 	topo_jets_obj.clear();
@@ -164,6 +165,8 @@ void EventAction::EndOfEventAction(const G4Event *evt)
 			    pflow_obj.fill_cell_var();
 			trajectories.fill_var();
 
+			GraphConstructor graph_construct_high(cells_data_high.Cells_in_topoclusters, tracks_list_low.Tracks_list, trajectories.particle_to_track, graph_obj_high);
+
 			std::vector<float> _particle_dep_energies;
 			GraphConstructor graph_construct(cells_data_low.Cells_in_topoclusters, cells_data_high.Cells_in_topoclusters, tracks_list_low.Tracks_list, trajectories.particle_to_track, graph_obj, &_particle_dep_energies);
 
@@ -178,7 +181,7 @@ void EventAction::EndOfEventAction(const G4Event *evt)
 			}
 			trajectories.make_pseudo_jet_particles();
 			jets_build.build_jets(trajectories.jets_objects, true_jets_obj, config_var.jet_parameter);
-			true_jets_obj.fill_cell_var();
+			true_jets_obj.fill_cell_var(config_var.jet_parameter.radius);
 			jets_build.reset();
 			topo_clusts.make_pseudo_jet_particles();
 			jets_build.build_jets(topo_clusts.jets_objects, topo_jets_obj, config_var.jet_parameter);
@@ -233,7 +236,7 @@ void EventAction::EndOfEventAction(const G4Event *evt)
 			}
 			trajectories.make_pseudo_jet_particles();
 			jets_build.build_jets(trajectories.jets_objects, true_jets_obj, config_var.jet_parameter);
-			true_jets_obj.fill_cell_var();
+			true_jets_obj.fill_cell_var(config_var.jet_parameter.radius);
 			jets_build.reset();
 			topo_clusts.make_pseudo_jet_particles();
 			jets_build.build_jets(topo_clusts.jets_objects, topo_jets_obj, config_var.jet_parameter);

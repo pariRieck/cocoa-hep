@@ -5,6 +5,8 @@ The COnfigurable Calorimeter simulatiOn for Ai (COCOA) is a nearly-hermetic calo
 
 The COCOA calorimeter comprises a barrel and endcap system with configurable granularity, and with nearly uniform material depth distribution in pseudorapidity. An inner tracker system consisting of silicon and iron layers immersed in a magnetic field can be included optionally, along with basic tracking emulation. Output data are processed using on-board algorithms for topological clustering of calorimeter cells, graph creation, and jet clustering. The COCOA geometry is also provided in a format supporting event visualization with [Phoenix](https://github.com/HSF/phoenix).
 
+The documentation can be found [here](https://cocoa-hep.readthedocs.io/en/latest/).
+
 ## Publication
 [![DOI](https://zenodo.org/badge/563008933.svg)](https://zenodo.org/badge/latestdoi/563008933)
 
@@ -50,8 +52,9 @@ From within `COCOA` directory:
 
 **List of options:**
 - `--config (-c) <str>` – path to json configuration file.
-- `--macro (-m) <str>` – path to Geant4 or Pythia8 macro file for event generation (can be set in json configuration file.
+- `--macro (-m) <str>` – path to Geant4 or Pythia8 macro file for event generation (can be set in json configuration file).
 - `--output (-o) <str>`  – path (incl. name) of output ROOT file to be written (can be set in json configuration file).
+- `--input (-i) <str>` - path to HepMC (.hmc) input file (overrides the default path set in the HepMC macro file).
 - `--seed (-s) <int>` –   set random seed.
 - `--nevents (-n) <int>` - number of events to generate (default is taken from macro).
 
@@ -69,6 +72,8 @@ python util/dump_hdf5.py -i path/to/input.root -o path/to/output.h5
 To see more options, pass the `-h` argument.
 
 ## Phoenix event display
+
+**Live demo hosted here:** [https://cocoa-phoenix.web.cern.ch/](https://cocoa-phoenix.web.cern.ch/)
 
 <img src="https://github.com/scd-hep/scd-hep/blob/main/docs/imgs/ttbar.png" height="250">
 
